@@ -9,16 +9,16 @@ This project is solely intended for small, typically single file C programs to b
 ## Usage 🐳
 **Prerequisites:** [Docker](https://docs.docker.com/engine/install/)
 ```shell
-docker run --rm -it -v "$PWD:/pwd" take-me-back [GCC FLAGS]
+docker run --rm -it -v "$PWD:/pwd" --user $(id -u):$(id -g) take-me-back [GCC FLAGS]
 ```
 
 ### Example
 ```shell
-docker run --rm -it -v "$PWD:/pwd" take-me-back vuln.c -o vuln -fno-stack-protector -z execstack -no-pie
+docker run --rm -it -v "$PWD:/pwd" --user $(id -u):$(id -g) take-me-back vuln.c -o vuln -fno-stack-protector -z execstack -no-pie
 ```
 
 ## TODO 📋
 - [ ] Figure out a clean way to allow someone to specify the glibc version they need
 - [x] ~~maybe write a Python wrapper to handle the whole file path issue?~~ `WORKDIR` is a thing dummy
 - [ ] Use a smaller base image, maybe Arch Linux or [alpine-glibc](https://hub.docker.com/r/frolvlad/alpine-glibc)?
-- [ ] Fix the whole ownership thing
+- [x] Fix the whole ownership thing

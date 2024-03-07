@@ -11,3 +11,5 @@ if [[ ! -f "./libc.so.6" ]]; then
     cp $(gcc --print-file-name=libc.so.6) .
     cp $(ldd $(which true) | tail -n 1 | cut -d ' ' -f 1) .
 fi
+
+rm ./libc.so.* ./ld-linux-x*
